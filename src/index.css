@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@layer base {
+  :root {
+    --background: 20 10% 4%;
+    --foreground: 35 20% 90%;
+
+    --card: 20 8% 8%;
+    --card-foreground: 35 20% 90%;
+
+    --popover: 20 8% 8%;
+    --popover-foreground: 35 20% 90%;
+
+    --primary: 30 60% 50%;
+    --primary-foreground: 20 10% 4%;
+
+    --secondary: 25 15% 14%;
+    --secondary-foreground: 35 20% 85%;
+
+    --muted: 20 10% 12%;
+    --muted-foreground: 30 10% 50%;
+
+    --accent: 35 80% 55%;
+    --accent-foreground: 20 10% 4%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 25 15% 18%;
+    --input: 25 15% 18%;
+    --ring: 30 60% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 20 10% 6%;
+    --sidebar-foreground: 35 20% 85%;
+    --sidebar-primary: 30 60% 50%;
+    --sidebar-primary-foreground: 20 10% 4%;
+    --sidebar-accent: 25 15% 14%;
+    --sidebar-accent-foreground: 35 20% 85%;
+    --sidebar-border: 25 15% 18%;
+    --sidebar-ring: 30 60% 50%;
+
+    /* Custom tokens */
+    --amber-glow: 30 80% 50%;
+    --gold: 40 90% 55%;
+    --glass-bg: 20 10% 8% / 0.6;
+    --glass-border: 30 30% 30% / 0.3;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: "Inter", sans-serif;
+  }
+
+  @media (pointer: fine) {
+    body, button, a, .cursor-pointer {
+      cursor: none !important;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Orbitron", sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-xl border backdrop-blur-xl;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+  }
+
+  .glow-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--gold)),
+      hsl(var(--primary)),
+      hsl(var(--gold))
+    );
+    background-size: 200% auto;
+    animation: text-shine 3s linear infinite, text-pulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px hsl(var(--gold) / 0.5));
+  }
+
+  @keyframes text-shine {
+    to { background-position: 200% center; }
+  }
+
+  @keyframes text-pulse {
+    0%, 100% { filter: drop-shadow(0 0 15px hsl(var(--gold) / 0.5)); }
+    50% { filter: drop-shadow(0 0 25px hsl(var(--gold) / 0.8)); }
+  }
+
+  .glow-border {
+    box-shadow:
+      0 0 15px hsl(var(--amber-glow) / 0.2),
+      inset 0 0 15px hsl(var(--amber-glow) / 0.05);
+  }
+
+  .glow-button {
+    @apply relative overflow-hidden transition-all duration-300;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--accent))
+    );
+    box-shadow: 0 0 20px hsl(var(--amber-glow) / 0.3);
+  }
+
+  .glow-button:hover {
+    box-shadow:
+      0 0 30px hsl(var(--amber-glow) / 0.5),
+      0 0 60px hsl(var(--amber-glow) / 0.2);
+    transform: translateY(-1px);
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .sos-pulse {
+    animation: sos-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes sos-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 hsl(0 72% 51% / 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 15px hsl(0 72% 51% / 0);
+    }
+  }
+
+  .blockchain-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium;
+    background: linear-gradient(135deg, hsl(30 40% 15%), hsl(25 30% 10%));
+    border: 1px solid hsl(var(--amber-glow) / 0.3);
+    color: hsl(var(--gold));
+  }
+}
